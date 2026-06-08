@@ -5,7 +5,7 @@ import { SlidersHorizontal, RotateCcw } from 'lucide-react';
 
 interface FilterPanelProps {
   type: 'project' | 'task';
-  showProjectFilter?: boolean; // toggle filter inside task list if needed
+  showProjectFilter?: boolean;
 }
 
 export function FilterPanel({ type }: FilterPanelProps) {
@@ -31,7 +31,7 @@ export function FilterPanel({ type }: FilterPanelProps) {
       </div>
 
       <div className="flex flex-wrap items-center gap-3 ml-2">
-        {/* Project Status Filter */}
+        {}
         {type === 'project' && (
           <select
             value={projectStatus}
@@ -45,7 +45,7 @@ export function FilterPanel({ type }: FilterPanelProps) {
           </select>
         )}
 
-        {/* Task Status Filter */}
+        {}
         {type === 'task' && (
           <>
             <select
@@ -59,7 +59,7 @@ export function FilterPanel({ type }: FilterPanelProps) {
               <option value="COMPLETED">Completed</option>
             </select>
 
-            {/* Task Priority Filter */}
+            {}
             <select
               value={priority}
               onChange={(e) => setPriority(e.target.value)}
@@ -71,7 +71,7 @@ export function FilterPanel({ type }: FilterPanelProps) {
               <option value="LOW">Low</option>
             </select>
 
-            {/* Assignee Filter */}
+            {}
             <select
               value={assignedUserId}
               onChange={(e) => setAssignedUserId(e.target.value)}
@@ -87,7 +87,7 @@ export function FilterPanel({ type }: FilterPanelProps) {
           </>
         )}
 
-        {/* Reset Trigger */}
+        {}
         <button
           onClick={resetFilters}
           className="inline-flex items-center gap-1.5 rounded-lg border border-transparent px-3 py-1.5 text-xs font-semibold text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"

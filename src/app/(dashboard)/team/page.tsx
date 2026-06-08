@@ -17,7 +17,6 @@ export default function TeamPage() {
   const currentUser = session?.user;
   const isAdmin = currentUser?.role === 'ADMIN';
 
-  // Query team workload details
   const { data: workloads = [], isLoading, isError, refetch } = useWorkloads();
   const deleteUserMutation = useDeleteUser();
   const { addToast } = useNotificationStore();
@@ -129,7 +128,7 @@ export default function TeamPage() {
             key={item.id || idx}
             className="hover:bg-zinc-50/50 transition-colors dark:hover:bg-zinc-900/10"
           >
-            {/* User Profile column */}
+            {}
             <td className="px-6 py-4 whitespace-nowrap">
               <div className="flex items-center gap-3">
                 <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-zinc-150 text-xs font-bold border border-zinc-200 select-none dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-350">
@@ -158,12 +157,12 @@ export default function TeamPage() {
               </div>
             </td>
 
-            {/* System Role column */}
+            {}
             <td className="px-6 py-4 whitespace-nowrap">
               {getRoleBadge(item.role)}
             </td>
 
-            {/* Workload breakdown metrics column */}
+            {}
             <td className="px-6 py-4 whitespace-nowrap">
               <div className="flex items-center gap-4 text-xs font-medium text-zinc-500">
                 <div className="text-center">
@@ -193,12 +192,12 @@ export default function TeamPage() {
               </div>
             </td>
 
-            {/* Capacity status tag column */}
+            {}
             <td className="px-6 py-4 whitespace-nowrap">
               {getCapacityStatus(item.workload.pending)}
             </td>
 
-            {/* Admin actions column */}
+            {}
             {isAdmin && (
               <td className="px-6 py-4 whitespace-nowrap">
                 {item.id !== currentUser?.id ? (

@@ -121,7 +121,7 @@ export function ActivityTimeline({ activities }: ActivityTimelineProps) {
                 />
               ) : null}
               <div className="relative flex space-x-3">
-                {/* User avatar or initials */}
+                {}
                 <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 text-xs font-semibold text-zinc-600 border border-zinc-200 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-300">
                   {activity.user.avatarUrl ? (
                     <Image
@@ -137,7 +137,7 @@ export function ActivityTimeline({ activities }: ActivityTimelineProps) {
                   )}
                 </div>
                 
-                {/* Action details */}
+                {}
                 <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                   <div>
                     <p className="text-sm text-zinc-600 dark:text-zinc-400">

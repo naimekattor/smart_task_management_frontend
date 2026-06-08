@@ -31,7 +31,6 @@ export function CreateTaskModal() {
   const isOpen = activeModal === 'createTask';
   const projectId = metaData?.projectId;
 
-  // Fetch project details to load list of assigned members
   const { data: project } = useProject(projectId);
 
   const {
@@ -68,7 +67,6 @@ export function CreateTaskModal() {
     { value: 'LOW', label: 'Low' },
   ];
 
-  // Map project members to dropdown options
   const memberOptions = [
     { value: 'UNASSIGNED', label: 'Unassigned' },
     ...(project?.members?.map((m: any) => ({

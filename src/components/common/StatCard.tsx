@@ -62,7 +62,7 @@ export function StatCard({
           {description}
         </p>
       )}
-      {/* Decorative gradient light reflection */}
+      {}
       <div className="absolute -bottom-8 -right-8 h-24 w-24 rounded-full bg-radial from-violet-500/5 to-transparent dark:from-violet-500/10"></div>
     </div>
   );

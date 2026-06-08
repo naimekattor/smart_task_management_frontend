@@ -29,7 +29,6 @@ import {
 } from 'recharts';
 
 export default function DashboardPage() {
-  // 1. Query dashboard KPIs & charts data
   const {
     data: analytics,
     isLoading: isAnalyticsLoading,
@@ -37,7 +36,6 @@ export default function DashboardPage() {
     refetch: refetchAnalytics,
   } = useDashboardAnalytics();
 
-  // 2. Query activity logs
   const {
     data: activities = [],
     isLoading: isActivityLoading,
@@ -63,7 +61,6 @@ export default function DashboardPage() {
 
   const { kpis, charts } = analytics;
 
-  // Chart Styling Constants
   const COLORS = ['#6366f1', '#3b82f6', '#10b981', '#f59e0b', '#ef4444'];
   const PRIORITY_COLORS = { High: '#ef4444', Medium: '#f59e0b', Low: '#3b82f6' };
   const STATUS_COLORS = { Todo: '#6366f1', 'In Progress': '#3b82f6', Completed: '#10b981' };
@@ -75,7 +72,7 @@ export default function DashboardPage() {
         description="Comprehensive overview of workspace productivity, milestones, and audit trails."
       />
 
-      {/* KPI STAT CARDS CONTAINER */}
+      {}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
         <StatCard
           title="Total Projects"
@@ -118,10 +115,10 @@ export default function DashboardPage() {
         />
       </div>
 
-      {/* CHARTS CONTAINER GRID */}
+      {}
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         
-        {/* Project Progress Trend */}
+        {}
         <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 lg:col-span-2">
           <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
             Project Completion Rates (%)
@@ -157,7 +154,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Task Priorities distribution */}
+        {}
         <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
           <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
             Tasks by Priority
@@ -196,7 +193,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Task Status Distribution */}
+        {}
         <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
           <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
             Task Status Distribution
@@ -235,7 +232,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Team Productivity completions */}
+        {}
         <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 lg:col-span-2">
           <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
             Team Productivity (Completed Tasks)
@@ -268,7 +265,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* RECENT ACTIVITY LOGS & WORKLOAD TIMELINE */}
+      {}
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 lg:col-span-3">
           <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50 border-b border-zinc-100 pb-3 dark:border-zinc-900">

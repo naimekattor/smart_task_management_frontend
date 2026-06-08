@@ -14,7 +14,6 @@ export function useProjects(filters: ProjectFilters = {}) {
   return useQuery({
     queryKey: ['projects', filters],
     queryFn: async () => {
-      // Remove 'ALL' string before sending to API
       const params = { ...filters };
       if (params.status === 'ALL') delete params.status;
       if (!params.search) delete params.search;

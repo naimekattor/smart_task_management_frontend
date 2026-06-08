@@ -65,19 +65,16 @@ export function KanbanBoard({ tasks, projectId, userRole, userId }: KanbanBoardP
     },
   ];
 
-  // Drag start handler
   const handleDragStart = (e: React.DragEvent, taskId: string, taskStatus: TaskStatus) => {
     e.dataTransfer.setData('text/plain', taskId);
     setActiveDragId(taskId);
   };
 
-  // Drag end handler
   const handleDragEnd = () => {
     setActiveDragId(null);
     setDragOverColumn(null);
   };
 
-  // Drag over handler
   const handleDragOver = (e: React.DragEvent, status: TaskStatus) => {
     e.preventDefault();
     if (dragOverColumn !== status) {
@@ -85,7 +82,6 @@ export function KanbanBoard({ tasks, projectId, userRole, userId }: KanbanBoardP
     }
   };
 
-  // Drop handler
   const handleDrop = async (e: React.DragEvent, targetStatus: TaskStatus) => {
     e.preventDefault();
     const taskId = e.dataTransfer.getData('text/plain');
@@ -97,7 +93,6 @@ export function KanbanBoard({ tasks, projectId, userRole, userId }: KanbanBoardP
 
     if (task.status === targetStatus) return;
 
-    // Team member permission check (only assigned user can move)
     if (userRole === 'TEAM_MEMBER' && task.assignedUserId !== userId) {
       addToast('Access denied. You can only move tasks assigned to you.', 'error');
       return;
@@ -158,7 +153,7 @@ export function KanbanBoard({ tasks, projectId, userRole, userId }: KanbanBoardP
                 : 'border-zinc-200 dark:border-zinc-800'
             }`}
           >
-            {/* Column Header */}
+            {}
             <div className="flex items-center justify-between pb-3">
               <div className="flex items-center gap-2">
                 <span className={`text-sm font-semibold uppercase tracking-wider ${col.text}`}>
@@ -169,7 +164,7 @@ export function KanbanBoard({ tasks, projectId, userRole, userId }: KanbanBoardP
                 </span>
               </div>
               
-              {/* Only PMs/Admins can add tasks in columns directly */}
+              {}
               {(userRole === 'ADMIN' || userRole === 'PROJECT_MANAGER') && col.status === TaskStatus.TODO && (
                 <button
                   onClick={() => openModal('createTask', { projectId })}
@@ -180,7 +175,7 @@ export function KanbanBoard({ tasks, projectId, userRole, userId }: KanbanBoardP
               )}
             </div>
 
-            {/* Cards Container */}
+            {}
             <div className="flex-1 space-y-3 overflow-y-auto mt-2">
               {columnTasks.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-12 text-center text-zinc-400 select-none">
@@ -200,7 +195,7 @@ export function KanbanBoard({ tasks, projectId, userRole, userId }: KanbanBoardP
                         isDragging ? 'opacity-40 scale-98 pointer-events-none' : ''
                       }`}
                     >
-                      {/* Priority Tag */}
+                      {}
                       <div className="flex items-center justify-between">
                         <span
                           className={`rounded-full border px-2 py-0.5 text-2xs font-semibold uppercase tracking-wider ${getPriorityBadgeColor(
@@ -213,19 +208,19 @@ export function KanbanBoard({ tasks, projectId, userRole, userId }: KanbanBoardP
                         <ArrowUpRight className="h-4 w-4 opacity-0 group-hover:opacity-100 text-zinc-400 transition-opacity" />
                       </div>
 
-                      {/* Title */}
+                      {}
                       <h4 className="mt-3 text-sm font-semibold text-zinc-800 dark:text-zinc-100">
                         {task.title}
                       </h4>
 
-                      {/* Description snippet */}
+                      {}
                       {task.description && (
                         <p className="mt-1 text-xs text-zinc-500 line-clamp-2 dark:text-zinc-400">
                           {task.description}
                         </p>
                       )}
 
-                      {/* Card Footer info */}
+                      {}
                       <div className="mt-4 flex items-center justify-between border-t border-zinc-100 pt-3 dark:border-zinc-900">
                         <div className="flex items-center gap-1.5 text-2xs text-zinc-400 dark:text-zinc-500">
                           <Calendar className="h-3 w-3" />
@@ -233,7 +228,7 @@ export function KanbanBoard({ tasks, projectId, userRole, userId }: KanbanBoardP
                         </div>
 
                         <div className="flex items-center gap-3">
-                          {/* Comments count */}
+                          {}
                           {!!(task._count?.comments) && (
                             <div className="flex items-center gap-1 text-2xs text-zinc-400">
                               <MessageSquare className="h-3.5 w-3.5" />
@@ -241,7 +236,7 @@ export function KanbanBoard({ tasks, projectId, userRole, userId }: KanbanBoardP
                             </div>
                           )}
 
-                          {/* Assignee Avatar */}
+                          {}
                           {task.assignee ? (
                             <div
                               title={`Assigned to ${task.assignee.name}`}

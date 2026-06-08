@@ -11,7 +11,7 @@ type ModalType =
 
 interface ModalState {
   activeModal: ModalType;
-  metaData: any; // Contextual data (e.g. project data, task data, action callbacks)
+  metaData: any;
   openModal: (type: ModalType, metaData?: any) => void;
   closeModal: () => void;
 }

@@ -10,10 +10,8 @@ export const api = axios.create({
   },
 });
 
-// Attach Authorization Token to Client requests
 api.interceptors.request.use(
   async (config) => {
-    // getSession is client-safe
     const session = await getSession();
     if (session && (session as any).accessToken) {
       config.headers.Authorization = `Bearer ${(session as any).accessToken}`;
@@ -25,13 +23,11 @@ api.interceptors.request.use(
   }
 );
 
-// Global Error / Session Expiration handler
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
     
-    // Auto logout if backend returns 401 Unauthorized
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       if (typeof window !== 'undefined') {

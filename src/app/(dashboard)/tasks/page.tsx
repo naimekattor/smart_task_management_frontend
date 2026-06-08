@@ -28,16 +28,14 @@ function TasksPageContent() {
 
   const [activeProjectId, setActiveProjectId] = useState<string>('');
 
-  // 1. Fetch all projects to populate select dropdown
   const {
     data: projectsData,
     isLoading: isProjectsLoading,
     isError: isProjectsError,
-  } = useProjects({ limit: 100 }); // fetch all
+  } = useProjects({ limit: 100 });
 
   const projects = projectsData?.projects || [];
 
-  // Sync active project with query parameter or select first project
   useEffect(() => {
     if (queryProjectId) {
       setActiveProjectId(queryProjectId);
@@ -47,7 +45,6 @@ function TasksPageContent() {
     }
   }, [queryProjectId, projects, activeProjectId, router]);
 
-  // 2. Fetch tasks for active project and current filters
   const {
     data: tasksData,
     isLoading: isTasksLoading,
@@ -93,7 +90,7 @@ function TasksPageContent() {
         )}
       </PageHeader>
 
-      {/* BOARD SELECTOR & SEARCH ACTION AREA */}
+      {}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
           <Layers className="h-5 w-5 text-zinc-400" />
@@ -129,10 +126,10 @@ function TasksPageContent() {
         </div>
       ) : (
         <div className="space-y-6">
-          {/* FILTER PANEL */}
+          {}
           <FilterPanel type="task" />
 
-          {/* KANBAN BOARD SECTION */}
+          {}
           {isTasksLoading ? (
             <div className="flex justify-center items-center py-20 text-zinc-400">
               <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-200 border-t-violet-600"></div>

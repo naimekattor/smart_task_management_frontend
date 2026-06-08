@@ -94,7 +94,7 @@ function LoginPageContent() {
           </p>
         </div>
 
-        {/* Regular Login Form */}
+        {}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div className="-space-y-px rounded-md space-y-4">
             <FormInput
@@ -136,7 +136,7 @@ function LoginPageContent() {
           </div>
         </form>
 
-        {/* Demo Logins Section */}
+        {}
         <div className="mt-6">
           <div className="relative flex items-center justify-center">
             <div className="absolute inset-0 flex items-center">

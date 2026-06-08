@@ -48,10 +48,8 @@ export function EditTaskModal() {
   const isOpen = activeModal === 'editTask';
   const taskMeta = metaData?.task;
 
-  // 1. Fetch detailed task details (with comments and attachments)
   const { data: task, isLoading: isTaskLoading } = useTask(taskMeta?.id);
 
-  // 2. Fetch project details to load project members for assignees select
   const { data: project } = useProject(task?.projectId);
 
   const updateTaskMutation = useUpdateTask();
@@ -61,7 +59,6 @@ export function EditTaskModal() {
   const createCommentMutation = useCreateComment();
   const deleteCommentMutation = useDeleteComment();
 
-  // State for adding a comment or reply
   const [commentText, setCommentText] = useState('');
   const [activeReplyId, setActiveReplyId] = useState<string | null>(null);
   const [replyText, setReplyText] = useState('');
@@ -75,7 +72,6 @@ export function EditTaskModal() {
     resolver: zodResolver(taskSchema),
   });
 
-  // Pre-load task values into form
   useEffect(() => {
     if (task) {
       setValue('title', task.title);
@@ -91,7 +87,6 @@ export function EditTaskModal() {
 
   if (!isOpen || !taskMeta) return null;
 
-  // Determine user permissions based on roles
   const isPMOrAdmin = currentUser?.role === 'ADMIN' || currentUser?.role === 'PROJECT_MANAGER';
   const isAssigned = task?.assignedUserId === currentUser?.id;
   const canModifyEverything = isPMOrAdmin;
@@ -227,7 +222,6 @@ export function EditTaskModal() {
       .toUpperCase();
   };
 
-  // Group comments into root comments and their respective replies
   const rootComments = task?.comments?.filter((c: any) => !c.parentId) || [];
   const getReplies = (parentId: string) => {
     return task?.comments?.filter((c: any) => c.parentId === parentId) || [];
@@ -242,7 +236,7 @@ export function EditTaskModal() {
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          {/* LEFT PANEL: Core details, attachments, comments */}
+          {}
           <div className="lg:col-span-2 space-y-6">
             <div>
               <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
@@ -253,7 +247,7 @@ export function EditTaskModal() {
               </p>
             </div>
 
-            {/* Task Attachments section */}
+            {}
             <div className="border-t border-zinc-100 pt-6 dark:border-zinc-900">
               <h4 className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                 <Paperclip className="h-4 w-4" />
@@ -283,7 +277,7 @@ export function EditTaskModal() {
                         <ExternalLink className="h-3.5 w-3.5" />
                       </a>
                       
-                      {/* Only attachment owner, PM, or Admin can delete */}
+                      {}
                       {(isPMOrAdmin || file.userId === currentUser?.id) && (
                         <button
                           onClick={() => handleFileDelete(file.id)}
@@ -297,7 +291,7 @@ export function EditTaskModal() {
                 ))}
               </div>
 
-              {/* Attachment Uploader */}
+              {}
               {!hasNoEditAccess && (
                 <div className="mt-4">
                   <FileUploader
@@ -308,14 +302,14 @@ export function EditTaskModal() {
               )}
             </div>
 
-            {/* Task Comments system */}
+            {}
             <div className="border-t border-zinc-100 pt-6 dark:border-zinc-900">
               <h4 className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                 <MessageSquare className="h-4 w-4" />
                 <span>Comments ({task.comments?.length || 0})</span>
               </h4>
 
-              {/* Create root comment */}
+              {}
               <form onSubmit={handlePostComment} className="mt-4">
                 <textarea
                   value={commentText}
@@ -335,7 +329,7 @@ export function EditTaskModal() {
                 </div>
               </form>
 
-              {/* Threaded Comment list */}
+              {}
               <div className="mt-6 space-y-5">
                 {rootComments.map((comment: any) => {
                   const replies = getReplies(comment.id);
@@ -343,7 +337,7 @@ export function EditTaskModal() {
                   
                   return (
                     <div key={comment.id} className="space-y-4">
-                      {/* Root Comment Row */}
+                      {}
                       <div className="flex gap-3">
                         <div className="relative flex h-7 w-7 items-center justify-center rounded-full bg-zinc-100 text-xs font-semibold border border-zinc-200 select-none dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-300">
                           {comment.user.avatarUrl ? (
@@ -397,7 +391,7 @@ export function EditTaskModal() {
                         </div>
                       </div>
 
-                      {/* Reply Submission Field */}
+                      {}
                       {activeReplyId === comment.id && (
                         <form
                           onSubmit={(e) => handlePostReply(e, comment.id)}
@@ -420,7 +414,7 @@ export function EditTaskModal() {
                         </form>
                       )}
 
-                      {/* Replies List */}
+                      {}
                       {replies.map((reply: any) => {
                         const isReplyOwner = reply.userId === currentUser?.id;
                         return (
@@ -479,7 +473,7 @@ export function EditTaskModal() {
             </div>
           </div>
 
-          {/* RIGHT PANEL: Status dropdowns, priority selections, task deadline, assignee */}
+          {}
           <div className="space-y-6 rounded-xl border border-zinc-100 bg-zinc-50/50 p-5 dark:border-zinc-900 dark:bg-zinc-950/20">
             <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
               Task Settings
@@ -492,7 +486,7 @@ export function EditTaskModal() {
               </div>
             ) : (
               <form onSubmit={handleSubmit(handleSaveDetails)} className="space-y-5">
-                {/* Title and description edits are disabled for Team Members */}
+                {}
                 <FormInput
                   label="Title"
                   type="text"
@@ -548,7 +542,7 @@ export function EditTaskModal() {
                     {updateTaskMutation.isPending ? 'Saving...' : 'Save Settings'}
                   </button>
 
-                  {/* Only Admin/PM can delete a task */}
+                  {}
                   {isPMOrAdmin && (
                     <button
                       type="button"

@@ -58,19 +58,16 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [notifDropdownOpen, setNotifDropdownOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
 
-  // TanStack Query alerts hooks
   const { data: serverNotifications = [] } = useNotifications();
   const markAllReadMutation = useMarkAllNotificationsRead();
   const markReadMutation = useMarkNotificationRead();
 
-  // 1. Sync live notifications with database list on mount/update
   useEffect(() => {
     if (serverNotifications.length > 0) {
       setLiveNotifications(serverNotifications);
     }
   }, [serverNotifications, setLiveNotifications]);
 
-  // 2. Configure Socket.IO real-time notification listener
   useEffect(() => {
     if (!currentUser?.id) return;
 
@@ -82,7 +79,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       socket.emit('join_user', currentUser.id);
     });
 
-    // Handle live alert payload
     socket.on('notification_received', (note: InAppNotification) => {
       addLiveNotification(note);
       addToast(note.message, 'info');
@@ -134,13 +130,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <div className="flex h-screen overflow-hidden bg-zinc-50 font-sans text-zinc-900 transition-colors dark:bg-black dark:text-zinc-50">
       
-      {/* SIDEBAR NAVIGATION PANEL */}
+      {}
       <aside
         className={`fixed inset-y-0 left-0 z-40 flex flex-col border-r border-zinc-200 bg-white transition-all duration-300 dark:border-zinc-800 dark:bg-zinc-950 lg:static ${
           sidebarOpen ? 'w-64' : 'w-20 -translate-x-full lg:translate-x-0'
         }`}
       >
-        {/* Sidebar Header */}
+        {}
         <div className="flex h-16 items-center justify-between px-6 border-b border-zinc-100 dark:border-zinc-900">
           <div className="flex items-center gap-2.5 overflow-hidden">
             <div className="">
@@ -162,7 +158,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           )}
         </div>
 
-        {/* Navigation Items */}
+        {}
         <nav className="flex-1 space-y-1 px-4 py-6 overflow-y-auto">
           {menuItems.map((item) => {
             const isActive = pathname === item.path;
@@ -184,9 +180,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           })}
         </nav>
 
-        {/* Sidebar Footer (Theme toggle & Profile brief) */}
+        {}
         <div className="border-t border-zinc-150 p-4 space-y-4 dark:border-zinc-900">
-          {/* Theme switcher */}
+          {}
           <div className={`flex items-center justify-between ${sidebarOpen ? 'px-2' : 'justify-center'}`}>
             {sidebarOpen && <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">Theme</span>}
             <div className="flex rounded-lg bg-zinc-100 p-0.5 dark:bg-zinc-900">
@@ -214,7 +210,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             </div>
           </div>
 
-          {/* Profile briefly */}
+          {}
           {sidebarOpen && currentUser && (
             <div className="flex items-center gap-3 px-2 py-1.5">
               <div className="relative flex h-8 w-8 items-center justify-center rounded-full overflow-hidden bg-zinc-100 text-xs font-semibold text-zinc-600 uppercase border border-zinc-200 dark:border-zinc-850 dark:bg-zinc-800 dark:text-zinc-300">
@@ -244,10 +240,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </div>
       </aside>
 
-      {/* MAIN CONTENT SHELL */}
+      {}
       <div className="flex flex-1 flex-col overflow-hidden">
         
-        {/* HEADER PANEL */}
+        {}
         <header className="flex h-16 shrink-0 items-center justify-between border-b border-zinc-200 bg-white px-6 shadow-2xs dark:border-zinc-800 dark:bg-zinc-950">
           
           <div className="flex items-center gap-4">
@@ -258,13 +254,12 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <Menu className="h-5 w-5" />
             </button>
             
-            {/* Global Search Bar linking search queries to filterStore */}
+            {}
             <div className="hidden sm:block">
               <SearchBar
                 value={searchQuery}
                 onChange={(val) => {
                   setSearchQuery(val);
-                  // Redirect to tasks page to show filtered search if they type and are on a different page
                   if (pathname !== '/tasks' && pathname !== '/projects' && val) {
                     router.push('/tasks');
                   }
@@ -275,7 +270,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
 
           <div className="flex items-center gap-4">
-            {/* Notification Bell Badge */}
+            {}
             <div className="relative">
               <button
                 onClick={() => setNotifDropdownOpen(!notifDropdownOpen)}
@@ -289,7 +284,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 )}
               </button>
 
-              {/* Notification Dropdown list */}
+              {}
               {notifDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-80 rounded-xl border border-zinc-200 bg-white py-2 shadow-xl dark:border-zinc-800 dark:bg-zinc-950 z-50">
                   <div className="flex items-center justify-between border-b border-zinc-100 px-4 pb-2 dark:border-zinc-900">
@@ -334,7 +329,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               )}
             </div>
 
-            {/* Profile Dropdown */}
+            {}
             {currentUser && (
               <div className="relative">
                 <button
@@ -375,13 +370,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           </div>
         </header>
 
-        {/* PAGE BODY VIEW */}
+        {}
         <main className="flex-1 overflow-y-auto px-6 py-8 md:px-8">
           {children}
         </main>
       </div>
 
-      {/* FLOATING TOAST ALERTS PANELS */}
+      {}
       <div className="fixed bottom-6 right-6 z-50 space-y-3 w-80">
         {toasts.map((toast) => (
           <div
@@ -410,7 +405,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         ))}
       </div>
 
-      {/* GLOBAL MODALS PORTS */}
+      {}
       <CreateProjectModal />
       <EditProjectModal />
       <CreateTaskModal />

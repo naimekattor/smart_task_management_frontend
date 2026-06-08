@@ -10,12 +10,10 @@ interface SearchBarProps {
 export function SearchBar({ placeholder = 'Search...', value, onChange }: SearchBarProps) {
   const [localValue, setLocalValue] = useState(value);
 
-  // Sync internal state with external value changes (e.g. resets)
   useEffect(() => {
     setLocalValue(value);
   }, [value]);
 
-  // Debounced trigger
   useEffect(() => {
     const handler = setTimeout(() => {
       onChange(localValue);

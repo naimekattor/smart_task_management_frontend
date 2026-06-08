@@ -29,7 +29,6 @@ export default function ProjectsPage() {
   const { openModal } = useModalStore();
   const { projectStatus, searchQuery } = useFilterStore();
 
-  // 1. Fetch projects with current status & search term
   const {
     data,
     isLoading,
@@ -91,10 +90,10 @@ export default function ProjectsPage() {
         )}
       </PageHeader>
 
-      {/* FILTER PANEL */}
+      {}
       <FilterPanel type="project" />
 
-      {/* PROJECTS LIST GRID */}
+      {}
       {projects.length === 0 ? (
         <EmptyState
           title="No projects active"
@@ -105,7 +104,6 @@ export default function ProjectsPage() {
       ) : (
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project: any) => {
-            // Calculate progress parameters
             const totalTasks = project.tasks?.length || 0;
             const completedTasks = project.tasks?.filter((t: any) => t.status === 'COMPLETED').length || 0;
             const progress = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
@@ -124,7 +122,7 @@ export default function ProjectsPage() {
                 className="group relative flex flex-col justify-between rounded-xl border border-zinc-200 bg-white p-6 shadow-2xs hover:shadow-sm dark:border-zinc-800 dark:bg-zinc-950 transition-all"
               >
                 <div>
-                  {/* Card Header Status & Actions */}
+                  {}
                   <div className="flex items-center justify-between">
                     <span
                       className={`rounded-full border px-2.5 py-0.5 text-3xs font-semibold uppercase tracking-wider ${getStatusColor(
@@ -154,7 +152,7 @@ export default function ProjectsPage() {
                     )}
                   </div>
 
-                  {/* Title & Description */}
+                  {}
                   <h3 className="mt-4 text-base font-bold text-zinc-950 dark:text-zinc-50">
                     {project.name}
                   </h3>
@@ -164,7 +162,7 @@ export default function ProjectsPage() {
                 </div>
 
                 <div className="mt-6 space-y-4">
-                  {/* Task progress percentage slider */}
+                  {}
                   <div>
                     <div className="flex items-center justify-between text-3xs font-bold text-zinc-400 uppercase tracking-wider">
                       <span className="flex items-center gap-1">
@@ -181,7 +179,7 @@ export default function ProjectsPage() {
                     </div>
                   </div>
 
-                  {/* Deadline & Avatar details */}
+                  {}
                   <div className="flex items-center justify-between border-t border-zinc-100 pt-4 dark:border-zinc-900">
                     <div
                       className={`flex items-center gap-1.5 text-3xs font-semibold ${
@@ -197,7 +195,7 @@ export default function ProjectsPage() {
                     <MemberAvatarGroup members={projectMembers} limit={3} />
                   </div>
 
-                  {/* View Tasks link button */}
+                  {}
                   <Link
                     href={`/tasks?projectId=${project.id}`}
                     className="flex w-full items-center justify-center gap-1.5 rounded-lg bg-zinc-50 py-2 text-xs font-semibold text-zinc-700 hover:bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800/80 transition-colors"

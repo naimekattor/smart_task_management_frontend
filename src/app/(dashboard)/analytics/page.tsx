@@ -52,7 +52,7 @@ export default function AnalyticsPage() {
         description="Review detailed statistics on tasks, timelines, and resource capacities."
       />
 
-      {/* Analytics KPI section */}
+      {}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
           title="Milestone Completion Rate"
@@ -85,7 +85,7 @@ export default function AnalyticsPage() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        {/* Project Completion Progress (Bar Chart) */}
+        {}
         <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
           <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50 border-b border-zinc-100 pb-3 dark:border-zinc-900">
             Project Timelines & Completion (%)
@@ -120,7 +120,7 @@ export default function AnalyticsPage() {
           </div>
         </div>
 
-        {/* Team productivity completions */}
+        {}
         <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
           <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50 border-b border-zinc-100 pb-3 dark:border-zinc-900">
             Team Completions Summary
@@ -156,7 +156,7 @@ export default function AnalyticsPage() {
           </div>
         </div>
 
-        {/* Task Status Share (Pie Chart) */}
+        {}
         <div className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 lg:col-span-2">
           <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50 border-b border-zinc-100 pb-3 dark:border-zinc-900">
             Tasks Resolution Share

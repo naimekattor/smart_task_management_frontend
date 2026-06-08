@@ -50,7 +50,6 @@ export default function RegisterPage() {
   const onSubmit = async (data: RegisterFormValues) => {
     setIsLoading(true);
     try {
-      // 1. Post registration details to backend Express server
       const response = await axios.post(`${BACKEND_URL}/auth/register`, {
         name: data.name,
         email: data.email,
@@ -61,7 +60,6 @@ export default function RegisterPage() {
       if (response.data && response.data.success) {
         addToast('Registration successful! Automatically logging you in...', 'success');
         
-        // 2. Seamlessly sign-in using NextAuth credentials
         const result = await signIn('credentials', {
           email: data.email,
           password: data.password,

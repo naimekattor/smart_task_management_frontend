@@ -38,7 +38,6 @@ export function EditProjectModal() {
     resolver: zodResolver(projectSchema),
   });
 
-  // Pre-load values
   useEffect(() => {
     if (project) {
       setValue('name', project.name);

@@ -34,7 +34,6 @@ export const useNotificationStore = create<NotificationState>((set) => ({
       toasts: [...state.toasts, { id, message, type }],
     }));
     
-    // Auto remove toast after 4 seconds
     setTimeout(() => {
       set((state) => ({
         toasts: state.toasts.filter((t) => t.id !== id),

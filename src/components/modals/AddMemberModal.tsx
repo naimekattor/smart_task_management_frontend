@@ -40,7 +40,6 @@ export function AddMemberModal() {
       .toUpperCase();
   };
 
-  // Filter users who are NOT already project members
   const projectMemberIds = new Set(project?.members?.map((m: any) => m.userId) || []);
   const nonMembers = allUsers.filter((u: any) => !projectMemberIds.has(u.id));
 
