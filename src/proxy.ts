@@ -25,8 +25,6 @@ export default auth((req) => {
 });
 
 export const config = {
-  runtime: 'nodejs',
-
   matcher: [
     /*
      * Match all paths except:
