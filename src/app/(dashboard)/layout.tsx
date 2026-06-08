@@ -142,7 +142,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         <div className="flex h-16 items-center justify-between px-6 border-b border-zinc-100 dark:border-zinc-900">
           <div className="flex items-center gap-2.5 overflow-hidden">
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-violet-600 font-bold text-white dark:bg-violet-500">
-              SC
+              <Image width={25} height={25} alt='logo' src={"/logo.png"}/>
             </div>
             {sidebarOpen && (
               <span className="text-sm font-bold tracking-tight text-zinc-900 truncate dark:text-zinc-50">

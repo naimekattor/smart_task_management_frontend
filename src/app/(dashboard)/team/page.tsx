@@ -1,24 +1,53 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
+import { useSession } from 'next-auth/react';
 import { PageHeader } from '@/components/common/PageHeader';
 import { LoadingState } from '@/components/common/LoadingState';
 import { ErrorState } from '@/components/common/ErrorState';
 import { DataTable } from '@/components/tables/DataTable';
-import { useWorkloads } from '@/hooks/useMembers';
-import { Mail, Shield, ShieldAlert, Users, Award } from 'lucide-react';
+import { useWorkloads, useDeleteUser } from '@/hooks/useMembers';
+import { ConfirmDialog } from '@/components/modals/ConfirmDialog';
+import { useNotificationStore } from '@/store/notificationStore';
+import { Mail, Shield, ShieldAlert, Users, Award, Trash2 } from 'lucide-react';
 import Image from 'next/image';
 
 export default function TeamPage() {
+  const { data: session } = useSession();
+  const currentUser = session?.user;
+  const isAdmin = currentUser?.role === 'ADMIN';
+
   // Query team workload details
   const { data: workloads = [], isLoading, isError, refetch } = useWorkloads();
+  const deleteUserMutation = useDeleteUser();
+  const { addToast } = useNotificationStore();
+
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState<{ id: string; name: string } | null>(null);
 
   const columns = [
     { key: 'user', label: 'Team Member' },
     { key: 'role', label: 'System Role' },
     { key: 'workload', label: 'Workload Metrics' },
     { key: 'status', label: 'Capacity Status' },
+    ...(isAdmin ? [{ key: 'actions', label: 'Actions' }] : []),
   ];
+
+  const handleDeleteClick = (id: string, name: string) => {
+    setUserToDelete({ id, name });
+    setDeleteConfirmOpen(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!userToDelete) return;
+    try {
+      await deleteUserMutation.mutateAsync(userToDelete.id);
+      addToast(`${userToDelete.name} was successfully removed from the system.`, 'success');
+      refetch();
+    } catch (err: any) {
+      addToast(err.message || 'Failed to remove user', 'error');
+    }
+  };
 
   const getRoleBadge = (role: string) => {
     switch (role) {
@@ -86,7 +115,7 @@ export default function TeamPage() {
   }
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-6 animate-fade-in text-zinc-900 dark:text-zinc-100">
       <PageHeader
         title="Team Member Workloads"
         description="Monitor assignments, check task density, and prevent resource bottlenecking."
@@ -168,9 +197,40 @@ export default function TeamPage() {
             <td className="px-6 py-4 whitespace-nowrap">
               {getCapacityStatus(item.workload.pending)}
             </td>
+
+            {/* Admin actions column */}
+            {isAdmin && (
+              <td className="px-6 py-4 whitespace-nowrap">
+                {item.id !== currentUser?.id ? (
+                  <button
+                    onClick={() => handleDeleteClick(item.id, item.name)}
+                    disabled={deleteUserMutation.isPending}
+                    className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-red-200 bg-white text-red-500 hover:border-red-350 hover:bg-red-50 hover:text-red-650 disabled:opacity-50 dark:border-red-950/40 dark:bg-zinc-950 dark:hover:bg-red-950/20"
+                    title="Remove User"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                ) : (
+                  <span className="text-2xs text-zinc-400 select-none">You (Admin)</span>
+                )}
+              </td>
+            )}
           </tr>
         )}
       />
+
+      {userToDelete && (
+        <ConfirmDialog
+          isOpen={deleteConfirmOpen}
+          onClose={() => setDeleteConfirmOpen(false)}
+          title="Remove User"
+          message={`Are you sure you want to permanently remove "${userToDelete.name}" from the system? This action will remove all their project assignments, comments, and attachments, and cannot be undone.`}
+          confirmLabel="Remove User"
+          onConfirm={handleConfirmDelete}
+          isDestructive
+          isLoading={deleteUserMutation.isPending}
+        />
+      )}
     </div>
   );
 }
