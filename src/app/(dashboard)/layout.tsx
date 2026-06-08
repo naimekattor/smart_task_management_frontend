@@ -8,11 +8,13 @@ import { useSidebarStore } from '@/store/sidebarStore';
 import { useNotificationStore, InAppNotification } from '@/store/notificationStore';
 import { useModalStore } from '@/store/modalStore';
 import { useNotifications, useMarkAllNotificationsRead, useMarkNotificationRead } from '@/hooks/useNotifications';
-import { CreateProjectModal } from '@/components/modals/CreateProjectModal';
-import { EditProjectModal } from '@/components/modals/EditProjectModal';
-import { CreateTaskModal } from '@/components/modals/CreateTaskModal';
-import { EditTaskModal } from '@/components/modals/EditTaskModal';
-import { AddMemberModal } from '@/components/modals/AddMemberModal';
+import dynamic from 'next/dynamic';
+
+const CreateProjectModal = dynamic(() => import('@/components/modals/CreateProjectModal').then(mod => mod.CreateProjectModal), { ssr: false });
+const EditProjectModal = dynamic(() => import('@/components/modals/EditProjectModal').then(mod => mod.EditProjectModal), { ssr: false });
+const CreateTaskModal = dynamic(() => import('@/components/modals/CreateTaskModal').then(mod => mod.CreateTaskModal), { ssr: false });
+const EditTaskModal = dynamic(() => import('@/components/modals/EditTaskModal').then(mod => mod.EditTaskModal), { ssr: false });
+const AddMemberModal = dynamic(() => import('@/components/modals/AddMemberModal').then(mod => mod.AddMemberModal), { ssr: false });
 import { SearchBar } from '@/components/common/SearchBar';
 import { useFilterStore } from '@/store/filterStore';
 import { useTheme } from 'next-themes';
