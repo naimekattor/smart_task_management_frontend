@@ -141,8 +141,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         {/* Sidebar Header */}
         <div className="flex h-16 items-center justify-between px-6 border-b border-zinc-100 dark:border-zinc-900">
           <div className="flex items-center gap-2.5 overflow-hidden">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-violet-600 font-bold text-white dark:bg-violet-500">
-              <Image width={25} height={25} alt='logo' src={"/logo.png"}/>
+            <div className="">
+              <Image width={80} height={70} alt='logo' src={"/logoSc.png"} unoptimized/>
             </div>
             {sidebarOpen && (
               <span className="text-sm font-bold tracking-tight text-zinc-900 truncate dark:text-zinc-50">
@@ -215,14 +215,14 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           {/* Profile briefly */}
           {sidebarOpen && currentUser && (
             <div className="flex items-center gap-3 px-2 py-1.5">
-              <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 text-xs font-semibold text-zinc-600 uppercase border border-zinc-200 dark:border-zinc-850 dark:bg-zinc-800 dark:text-zinc-300">
+              <div className="relative flex h-8 w-8 items-center justify-center rounded-full overflow-hidden bg-zinc-100 text-xs font-semibold text-zinc-600 uppercase border border-zinc-200 dark:border-zinc-850 dark:bg-zinc-800 dark:text-zinc-300">
                 {currentUser.avatarUrl ? (
                   <Image
                     src={currentUser.avatarUrl}
                     alt={currentUser.name || 'User'}
                     width={32}
                     height={32}
-                    className="rounded-full object-cover"
+                    className="h-full w-full object-cover"
                     unoptimized
                   />
                 ) : (
@@ -337,7 +337,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <div className="relative">
                 <button
                   onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-                  className="relative flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 text-xs font-semibold text-zinc-600 uppercase border border-zinc-200 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-300 hover:scale-105 transition-all"
+                  className="relative flex h-8 w-8 items-center justify-center rounded-full overflow-hidden bg-zinc-100 text-xs font-semibold text-zinc-600 uppercase border border-zinc-200 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-300 hover:scale-105 transition-all"
                 >
                   {currentUser.avatarUrl ? (
                     <Image
@@ -345,7 +345,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                       alt={currentUser.name || 'User'}
                       width={32}
                       height={32}
-                      className="rounded-full object-cover"
+                      className="h-full w-full object-cover"
                       unoptimized
                     />
                   ) : (
